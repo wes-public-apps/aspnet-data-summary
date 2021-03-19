@@ -1,0 +1,22 @@
+@model DataReviewProject.Models.FlightData
+@{
+    ViewData["Title"] = "Add Flight";
+}
+
+<h1>Add Flight Data:</h1>
+<hr />
+<div>
+    <form asp-controller="FlightData" asp-action="Create" method="post">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label">Name</label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
