@@ -1,0 +1,17 @@
+#Wesley Murray
+#Define a simple data summary project architecture.
+
+services:
+  #Set up web app using ASP.NET
+  DataReview:
+    image: mcr.microsoft.com/dotnet/sdk:5.0
+    working_dir: /app
+    ports:
+      - 5000:5000
+    volumes:
+      - ../../DataReviewProject:/app
+    command: ["dotnet","watch","run"]
+
+  #Add Database
+
+#Add Network

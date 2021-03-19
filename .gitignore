@@ -1,0 +1,6 @@
+#Binary Files
+[Oo]bj/
+[Bb]in/
+
+#Ide Files
+.vscode/
