@@ -20,7 +20,8 @@ services:
     image: mongo:latest
     restart: always
     env_file: 
-      - ./mongodb.env
+      - ./mongodb-secrets.env
+      - ./mongodb-config.env
     networks:
       DataReviewNetwork:
         ipv4_address: 172.20.0.2
