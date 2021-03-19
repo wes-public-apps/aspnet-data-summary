@@ -4,3 +4,6 @@
 
 #Ide Files
 .vscode/
+
+#Secrets
+Containers/Dev/mongodb.env
