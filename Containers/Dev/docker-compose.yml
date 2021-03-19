@@ -3,7 +3,7 @@
 
 services:
   #Set up web app using ASP.NET
-  DataReview:
+  DataReviewApp:
     image: mcr.microsoft.com/dotnet/sdk:5.0
     working_dir: /app
     ports:
@@ -11,7 +11,25 @@ services:
     volumes:
       - ../../DataReviewProject:/app
     command: ["dotnet","watch","run"]
+    networks:
+      DataReviewNetwork:
+        ipv4_address: 172.20.0.3
 
-  #Add Database
+  #Set up MongoDB Database
+  DataReviewDatabase:
+    image: mongo:latest
+    restart: always
+    env_file: 
+      - ./mongodb.env
+    networks:
+      DataReviewNetwork:
+        ipv4_address: 172.20.0.2
 
 #Add Network
+networks:
+  DataReviewNetwork:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+          gateway: 172.20.0.1
