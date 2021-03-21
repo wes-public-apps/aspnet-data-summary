@@ -26,14 +26,14 @@ namespace DataReviewProject
         public void ConfigureServices(IServiceCollection services)
         {
             // Add Database
-            services.Configure<FlightDataDatabaseSettings>(
-                Configuration.GetSection(nameof(FlightDataDatabaseSettings)));
-            services.AddSingleton<IFlightDataDatabaseSettings>(sp =>
-                sp.GetRequiredService<IOptions<FlightDataDatabaseSettings>>().Value);
+            services.Configure<FlightDataDatabaseSettings>(Configuration.GetSection("MongoDB"));
+            services.AddSingleton<IFlightDataDatabaseSettings>(sp => sp.GetRequiredService<IOptions<FlightDataDatabaseSettings>>().Value);
+
+            // Add data CRUD operations service
             services.AddSingleton<FlightDataService>();
 
-            services.AddControllersWithViews()
-                .AddNewtonsoftJson(options => options.UseMemberCasing());
+            // Add Controller Support
+            services.AddControllersWithViews().AddNewtonsoftJson(options => options.UseMemberCasing());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

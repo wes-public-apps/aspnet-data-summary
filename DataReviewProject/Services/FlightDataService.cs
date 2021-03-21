@@ -12,7 +12,7 @@ namespace DataReviewProject.Services {
         
         public FlightDataService(IFlightDataDatabaseSettings settings){
             MongoClient dbClient = new MongoClient(settings.ConnectionString);
-            var db = dbClient.GetDatabase(settings.DatabaseName);
+            var db = dbClient.GetDatabase(settings.Database);
             _flightData = db.GetCollection<FlightData>(settings.CollectionName);
         }
 
