@@ -6,4 +6,5 @@
 .vscode/
 
 #Secrets
-Containers/Dev/mongodb-secrets.env
+Containers/Dev/*-secrets.env
+DataReviewProject/.env
