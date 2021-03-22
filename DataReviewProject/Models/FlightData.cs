@@ -10,7 +10,7 @@ namespace DataReviewProject.Models {
     public class FlightData{
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        public ObjectId Id { get; set; }
 
         [BsonElement("Name")]
         public string Name { get; set; }
@@ -20,13 +20,13 @@ namespace DataReviewProject.Models {
 
         public FlightData(){
             this.TimeStamp = DateTime.Now;
-            this.Id=this.TimeStamp.ToString();
+            this.Id=ObjectId.GenerateNewId();
         }
 
         public FlightData(string name){
             this.Name=name;
             this.TimeStamp = DateTime.Now;
-            this.Id=this.TimeStamp.ToString();
+            this.Id=ObjectId.GenerateNewId();
         }
 
     }

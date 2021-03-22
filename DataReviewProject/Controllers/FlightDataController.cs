@@ -35,9 +35,10 @@ namespace DataReviewProject.Controllers
 
         #region Http Post (Handle Submissions)
         [HttpPost]
-        public ActionResult<CreatedAtRouteResult> Create(FlightData flightData){
-            this._fdService.Create(flightData);
-            return CreatedAtRoute("GetFlightData",new { id = flightData.Id.ToString() },flightData);
+        public async Task<IActionResult> CreateAsync(FlightData flightData){
+            await this._fdService.CreateAsync(flightData);
+            // return CreatedAtRoute("GetFlightData",new { id = flightData.Id.ToString() },flightData);
+            return View();
         }
         #endregion
     }
