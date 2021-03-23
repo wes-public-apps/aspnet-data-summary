@@ -1,0 +1,40 @@
+@model IEnumerable<DataReviewProject.Models.HardwareModels.Hardware>
+@{
+    ViewData["Title"] = "Hardware List";
+}
+
+<h1>Hardware</h1>
+
+<p>
+    <a asp-action="Create">Add Hardware</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MetaData.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MetaData.Description)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MetaData.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MetaData.Description)
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>

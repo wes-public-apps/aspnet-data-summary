@@ -1,0 +1,32 @@
+@using DataReviewProject.Models.HardwareModels
+@using System.Reflection
+@using Views.Hardware
+@model DataReviewProject.Models.HardwareModels.Hardware
+@{
+    ViewData["Title"] = "Add Flight";
+}
+
+<h1>Add Hardware:</h1>
+<hr />
+<div>
+    <form asp-controller="Hardware" asp-action="Create" method="post">
+        <div class="form-group">
+            <p>Type:</p>
+            @foreach (PropertyInfo item in typeof(HardwareTypes).GetProperties()){
+                <input type="radio" id=@item.Name name=@CreateViewKeyStrings.Type value=@item.Name>
+                <label for=@CreateViewKeyStrings.Type>@item.Name</label><br>
+            }
+        </div>
+        <div class="form-group">
+            <label name=@CreateViewKeyStrings.Name class="control-label">Name</label>
+            <input name=@CreateViewKeyStrings.Name class="form-control" />
+        </div>
+        <div class="form-group">
+            <label name=@CreateViewKeyStrings.Description class="control-label">Description</label>
+            <input name=@CreateViewKeyStrings.Description class="form-control" />
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

@@ -12,15 +12,16 @@ namespace DataReviewProject.Controllers
 {
     public class FlightDataController: Controller 
     {
-        private readonly FlightDataService _fdService;
+        private readonly UAVDataService _fdService;
 
-        public FlightDataController(FlightDataService service){
+        public FlightDataController(UAVDataService service){
             this._fdService=service;
         }
+
         #region Http Get (Page Generation)
         [HttpGet]
         public async Task<IActionResult> Index(){
-            List<FlightData> data = await _fdService.GetAsync();
+            List<FlightData> data = await _fdService.GetFlightDataAsync();
             data.Add(new FlightData("Test 1"));
             data.Add(new FlightData("Test 2"));
             data.Add(new FlightData("Test 3"));
@@ -36,7 +37,7 @@ namespace DataReviewProject.Controllers
         #region Http Post (Handle Submissions)
         [HttpPost]
         public async Task<IActionResult> CreateAsync(FlightData flightData){
-            await this._fdService.CreateAsync(flightData);
+            await this._fdService.CreateFlightDataAsync(flightData);
             // return CreatedAtRoute("GetFlightData",new { id = flightData.Id.ToString() },flightData);
             return View();
         }

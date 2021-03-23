@@ -26,11 +26,11 @@ namespace DataReviewProject
         public void ConfigureServices(IServiceCollection services)
         {
             // Add Database
-            services.Configure<FlightDataDatabaseSettings>(Configuration.GetSection("MongoDB"));
-            services.AddSingleton<IFlightDataDatabaseSettings>(sp => sp.GetRequiredService<IOptions<FlightDataDatabaseSettings>>().Value);
+            services.Configure<MongoDBSettings>(Configuration.GetSection("MongoDB"));
+            services.AddSingleton<MongoDBSettings>(sp => sp.GetRequiredService<IOptions<MongoDBSettings>>().Value);
 
             // Add data CRUD operations service
-            services.AddSingleton<FlightDataService>();
+            services.AddSingleton<UAVDataService>();
 
             // Add Controller Support
             services.AddControllersWithViews().AddNewtonsoftJson(options => options.UseMemberCasing());
