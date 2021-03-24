@@ -19,6 +19,8 @@ services:
   DataReviewDatabase:
     image: mongo:latest
     restart: always
+    volumes: 
+      - mongodb:/data/db
     env_file: 
       - ./mongodb-secrets.env
       - ./mongodb-config.env
@@ -49,3 +51,7 @@ networks:
       config:
         - subnet: 172.20.0.0/16
           gateway: 172.20.0.1
+
+#add volume to persist mongodb
+volumes:
+  mongodb:
