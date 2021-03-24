@@ -3,29 +3,31 @@
 // This model tracks flight data.
 
 using System;
+using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace DataReviewProject.Models {
-    public class FlightData{
+namespace DataReviewProject.Models.Data {
+    public class FlightData
+    {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public ObjectId Id { get; set; }
 
-        public string Name { get; set; }
-
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime TimeStamp { get; set; }
+
+        public List<SensorData> Data { get; set; }
 
         public FlightData(){
             this.TimeStamp = DateTime.Now;
             this.Id=ObjectId.GenerateNewId();
         }
 
-        public FlightData(string name){
-            this.Name=name;
+        public FlightData(List<SensorData> data){
             this.TimeStamp = DateTime.Now;
             this.Id=ObjectId.GenerateNewId();
+            this.Data=data;
         }
 
     }

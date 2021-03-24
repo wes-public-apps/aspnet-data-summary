@@ -2,8 +2,11 @@ using System.Threading.Tasks;
 using DataReviewProject.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using DataReviewProject.Models.HardwareModels;
 using DataReviewProject.Views.Hardware;
+using DataReviewProject.Utils.Factories;
+using DataReviewProject.Utils.Types;
+using DataReviewProject.Models.MetaDataModels;
+using System;
 
 namespace DataReviewProject.Controllers
 {
@@ -29,17 +32,16 @@ namespace DataReviewProject.Controllers
 
         #region Http Post (Handle Submissions)
         [HttpPost]
-        public async Task<IActionResult> CreateAsync(FormCollection form){
-            Hardware temp = null;
-            switch(form[CreateViewKeyStrings.Type]){
-                case HardwareTypes.NumericSensor:
-                    temp=new NumericSensor(new MetaData(form[CreateViewKeyStrings.Name],form[CreateViewKeyStrings.Description]));
-                    break;
-                default:
-                    temp = null;
-                    break;
-            }
-            await this._hdService.CreateHardwareAsync(temp);
+        public async Task<IActionResult> Create(IFormCollection form){
+            HardwareMetaData temp = HardwareMetaDataFactory.GetMetaData(
+                (HardwareTypes) Enum.Parse(typeof(HardwareTypes), form[CreateViewKeyStrings.HardwareType]),
+                form[CreateViewKeyStrings.Id],
+                (StatusTypes) Enum.Parse(typeof(StatusTypes), form[CreateViewKeyStrings.StatusType]),
+                form[CreateViewKeyStrings.Name],
+                form[CreateViewKeyStrings.Description],
+                null
+            );           
+            if(temp!=null) await this._hdService.CreateHardwareAsync(temp);
             return View();
         }
         #endregion

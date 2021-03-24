@@ -4,7 +4,7 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DataReviewProject.Models;
+using DataReviewProject.Models.Data;
 using DataReviewProject.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,9 +22,9 @@ namespace DataReviewProject.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(){
             List<FlightData> data = await _fdService.GetFlightDataAsync();
-            data.Add(new FlightData("Test 1"));
-            data.Add(new FlightData("Test 2"));
-            data.Add(new FlightData("Test 3"));
+            data.Add(new FlightData());
+            data.Add(new FlightData());
+            data.Add(new FlightData());
             return View(data);
         }
 

@@ -1,4 +1,5 @@
-@model IEnumerable<DataReviewProject.Models.HardwareModels.Hardware>
+@using Utils.Types
+@model IEnumerable<DataReviewProject.Models.MetaDataModels.HardwareMetaData>
 @{
     ViewData["Title"] = "Hardware List";
 }
@@ -12,13 +13,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                @Html.DisplayNameFor(model => model.Status)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MetaData.Name)
+                @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MetaData.Description)
+                @Html.DisplayNameFor(model => model.Description)
             </th>
         </tr>
     </thead>
@@ -26,13 +27,13 @@
         @foreach (var item in Model) {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Id)
+                        @Html.DisplayFor(modelItem => TypeToDisplayString.StatusTypeMap[item.Status])
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.MetaData.Name)
+                        @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.MetaData.Description)
+                        @Html.DisplayFor(modelItem => item.Description)
                     </td>
                 </tr>
         }
