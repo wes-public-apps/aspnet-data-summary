@@ -7,6 +7,7 @@ using DataReviewProject.Utils.Factories;
 using DataReviewProject.Utils.Types;
 using DataReviewProject.Models.MetaDataModels;
 using System;
+using DataReviewProject.Views.ViewModels;
 
 namespace DataReviewProject.Controllers
 {
@@ -25,24 +26,37 @@ namespace DataReviewProject.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create(){
+        public IActionResult CreateSensor(){
             return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CreateSensorGroup(){
+            return View(new SensorGroupViewModel(){
+                Hardware = (await this._hdService.GetHardwareAsync()).ConvertAll(hardware => new CheckableItem<HardwareMetaData>(hardware))
+            });
         }
         #endregion
 
         #region Http Post (Handle Submissions)
         [HttpPost]
-        public async Task<IActionResult> Create(IFormCollection form){
-            HardwareMetaData temp = HardwareMetaDataFactory.GetMetaData(
-                (HardwareTypes) Enum.Parse(typeof(HardwareTypes), form[CreateViewKeyStrings.HardwareType]),
-                form[CreateViewKeyStrings.Id],
-                (StatusTypes) Enum.Parse(typeof(StatusTypes), form[CreateViewKeyStrings.StatusType]),
-                form[CreateViewKeyStrings.Name],
-                form[CreateViewKeyStrings.Description],
-                null
-            );           
-            if(temp!=null) await this._hdService.CreateHardwareAsync(temp);
+        public async Task<IActionResult> CreateSensor(SensorMetaData smd){       
+            await this._hdService.CreateHardwareAsync(smd);
+            ModelState.Clear();
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateSensorGroup(SensorGroupViewModel sgvm){
+            Console.WriteLine(sgvm.SensorGroupMetaData);
+            Console.WriteLine(sgvm.Hardware);
+            sgvm.SensorGroupMetaData.Sensors = sgvm.Hardware.FindAll(checkableItem => checkableItem.IsChecked)
+                .ConvertAll(checkableItem => checkableItem.Item);
+            await this._hdService.CreateHardwareAsync(sgvm.SensorGroupMetaData);
+            ModelState.Clear();
+            return View(new SensorGroupViewModel(){
+                Hardware = (await this._hdService.GetHardwareAsync()).ConvertAll(hardware => new CheckableItem<HardwareMetaData>(hardware))
+            });
         }
         #endregion
 

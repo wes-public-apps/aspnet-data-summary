@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 
 namespace DataReviewProject.Utils.Types {
+    #region Enums
     public enum TimeUnits{
         Seconds,
         Minutes,
@@ -13,39 +14,25 @@ namespace DataReviewProject.Utils.Types {
         K,
     }
 
-    public enum HardwareTypes {
-        Sensor,
-        SensorGroup,
+    public enum StatusTypes {
+        Active,
+        Inactive,
     }
+    #endregion
 
-    public enum SensorTypes {
-        Temperature,
-        Position,
-    }
-
+    #region Interfaces
     public interface Labeled {
         StatusTypes Status {get;set;}
         string Name {get;set;}
         string Description {get;set;}
     }
+    #endregion
 
-    public enum StatusTypes {
-        Active,
-        Inactive,
-    }
-
+    #region Map Types to Display Strings
     public static class TypeToDisplayString{
-        public static Dictionary<HardwareTypes,string> HardwareTypeMap=new Dictionary<HardwareTypes, string>(){
-            {HardwareTypes.Sensor,"Sensor"},
-            {HardwareTypes.SensorGroup,"Sensor Group"},
-        };
         public static Dictionary<StatusTypes,string> StatusTypeMap=new Dictionary<StatusTypes, string>(){
             {StatusTypes.Active,"Active"},
             {StatusTypes.Inactive,"Inactive"},
-        };
-        public static Dictionary<SensorTypes,string> SensorTypeMap=new Dictionary<SensorTypes, string>(){
-            {SensorTypes.Temperature,"Temperature Sensor"},
-            {SensorTypes.Position,"Position Sensor"},
         };
         public static Dictionary<TimeUnits,string> TimeUnitMap=new Dictionary<TimeUnits, string>(){
             {TimeUnits.Seconds,"s"},
@@ -53,4 +40,5 @@ namespace DataReviewProject.Utils.Types {
             {TimeUnits.Hours,"h"},
         };
     }
+    #endregion
 }

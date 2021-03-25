@@ -3,12 +3,24 @@
 // Define Sensor Data container classes.
 
 using System.Collections.Generic;
+using DataReviewProject.Models.DataFrameModels;
 using DataReviewProject.Utils.Types;
 
-namespace DataReviewProject.Models.Data {
+namespace DataReviewProject.Models.SensorDataModels {
+    public enum SensorTypes {
+        Temperature,
+        Position,
+    }
+
+    public static class SensorTypesToDisplayString{
+        public static Dictionary<SensorTypes,string> Map=new Dictionary<SensorTypes, string>(){
+            {SensorTypes.Temperature,"Temperature"},
+            {SensorTypes.Position,"Position"},
+        };
+    }
+
     //Parent Sensor Data Class
     public class SensorData {
-
         public string IndependentVarLabel { get; set; }
         public string DependentVarLabel { get; set; }
 

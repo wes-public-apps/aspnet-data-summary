@@ -1,0 +1,44 @@
+@using Models.SensorDataModels
+@using Utils.Types
+@model DataReviewProject.Models.MetaDataModels.SensorMetaData
+@{
+    ViewData["Title"] = "Add Sensor";
+}
+
+<h1>Add Sensor:</h1>
+<hr />
+<div>
+    <form asp-controller="Hardware" asp-action="CreateSensor" method="post">
+        <div class="form-group">
+            <p>Status:</p>
+            @foreach (StatusTypes item in Enum.GetValues(typeof(StatusTypes))){
+                var name=TypeToDisplayString.StatusTypeMap[item];
+                @Html.RadioButtonFor(m => m.Status,item);
+                <label asp-for="Status">@name</label><br>
+            }
+        </div>
+        <div class="form-group">
+            <label asp-for="Id" class="control-label">Id</label>
+            <input asp-for="Id" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Name" class="control-label">Name</label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Description" class="control-label">Description</label>
+            <input asp-for="Description" class="form-control" />
+        </div>
+        <div class="form-group">
+            <p>Type:</p>
+            @foreach (SensorTypes item in Enum.GetValues(typeof(SensorTypes))){
+                var name=SensorTypesToDisplayString.Map[item];
+                @Html.RadioButtonFor(m => m.Type,item);
+                <label asp-for="Type">@name</label><br>
+            }
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

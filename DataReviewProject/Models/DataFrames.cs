@@ -2,7 +2,7 @@
 // 3/22/2021
 // Create a struct to hold data frames.
 
-namespace DataReviewProject.Models.Data {
+namespace DataReviewProject.Models.DataFrameModels {
     // Basic data frame for a aperiodic sensor
     // Used generics to switch between different types as necessary.
     public class APeriodicDataFrame<X,Y> {
