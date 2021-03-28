@@ -1,3 +1,6 @@
+// Wesley Murray
+// 3/22/2021
+// Service for retrieving information from MongoDB
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -32,10 +35,10 @@ namespace DataReviewProject.Services {
         #region Async Data Management
         #region UAV FlightData
         public async Task<List<FlightData>> GetFlightDataAsync()=> (await _flightData.FindAsync(fd => true)).ToList();
-        public async Task<FlightData> GetFlightDataAsync(ObjectId id)=> (await _flightData.FindAsync(fd => fd.Id==id)).FirstOrDefault();
+        public async Task<FlightData> GetFlightDataAsync(string id)=> (await _flightData.FindAsync(fd => fd.Id==id)).FirstOrDefault();
         public async Task CreateFlightDataAsync(FlightData flightData)=> await _flightData.InsertOneAsync(flightData);
-        public async Task UpdateFlightDataAsync(ObjectId id, FlightData flightDataIn) => await _flightData.ReplaceOneAsync(fd => fd.Id == id, flightDataIn);
-        public async Task RemoveFlightDataAsync(ObjectId id) => await _flightData.DeleteOneAsync(fd => fd.Id == id);
+        public async Task UpdateFlightDataAsync(string id, FlightData flightDataIn) => await _flightData.ReplaceOneAsync(fd => fd.Id == id, flightDataIn);
+        public async Task RemoveFlightDataAsync(string id) => await _flightData.DeleteOneAsync(fd => fd.Id == id);
         public async Task RemoveFlightDataAsync(FlightData flightData) => await _flightData.DeleteOneAsync(fd => fd.Id == flightData.Id);
         #endregion
 

@@ -50,4 +50,22 @@ namespace DataReviewProject.Models.DataFrameModels {
 
         public override string ToString() => $"{this.DependentVar}+/-{this.Err}";
     }
+
+    // Position Dataframe
+    public class CartesianPositionDataFrame{
+        public double X {get;set;}
+        public double DX {get;set;}
+        public double Y {get;set;}
+        public double DY {get;set;}
+        public double Z {get;set;}
+        public double DZ {get;set;}
+        public CartesianPositionDataFrame(double x,double dx,double y,double dy,double z,double dz){
+            this.X=x;
+            this.DX=dx;
+            this.Y=y;
+            this.DY=y;
+            this.Z=z;
+            this.DZ=dz;
+        }
+    }
 }

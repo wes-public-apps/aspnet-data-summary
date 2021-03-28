@@ -1,0 +1,10 @@
+@using Models.SensorDataModels
+@model DataReviewProject.Models.Data.FlightData
+@{
+    ViewData["Title"] = "Review Flight";
+}
+<h1>Flight Report</h1>
+@foreach (SensorData sensorData in Model.Data)
+{
+    sensorData.GetDataPlot();
+}

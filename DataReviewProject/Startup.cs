@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DataReviewProject.Models;
 using DataReviewProject.Models.MetaDataModels;
+using DataReviewProject.Models.SensorDataModels;
 using DataReviewProject.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -38,6 +39,11 @@ namespace DataReviewProject
             BsonClassMap.RegisterClassMap<HardwareMetaData>();
             BsonClassMap.RegisterClassMap<SensorMetaData>();
             BsonClassMap.RegisterClassMap<SensorGroupMetaData>();
+
+            //SensorData Classes
+            BsonClassMap.RegisterClassMap<SensorData>();
+            BsonClassMap.RegisterClassMap<TemperatureSensorData>();
+            BsonClassMap.RegisterClassMap<PositionSensorData>();
 
             // Add Controller Support
             services.AddControllersWithViews().AddNewtonsoftJson(options => options.UseMemberCasing());

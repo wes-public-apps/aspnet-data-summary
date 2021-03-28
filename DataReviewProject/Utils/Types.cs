@@ -39,6 +39,11 @@ namespace DataReviewProject.Utils.Types {
             {TimeUnits.Minutes,"m"},
             {TimeUnits.Hours,"h"},
         };
+        public static Dictionary<TemperatureUnits,string> TemperatureUnitMap=new Dictionary<TemperatureUnits, string>(){
+            {TemperatureUnits.F,"F"},
+            {TemperatureUnits.C,"C"},
+            {TemperatureUnits.K,"K"},
+        };
     }
     #endregion
 }

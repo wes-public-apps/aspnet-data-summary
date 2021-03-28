@@ -13,7 +13,7 @@ namespace DataReviewProject.Models.Data {
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public ObjectId Id { get; set; }
+        public string Id { get; set; }
 
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime TimeStamp { get; set; }
@@ -22,12 +22,12 @@ namespace DataReviewProject.Models.Data {
 
         public FlightData(){
             this.TimeStamp = DateTime.Now;
-            this.Id=ObjectId.GenerateNewId();
+            this.Id=ObjectId.GenerateNewId().ToString();
         }
 
         public FlightData(List<SensorData> data){
             this.TimeStamp = DateTime.Now;
-            this.Id=ObjectId.GenerateNewId();
+            this.Id=ObjectId.GenerateNewId().ToString();
             this.Data=data;
         }
 
